@@ -3,6 +3,17 @@ import sys
 import random
 
 
+def create_segment(num, segment_list):
+    """Randomly generate a section of the despoiler's name."""
+    choices = segment_list
+    segment = ''
+    for m in range(random.choice(num)):
+        random.shuffle(choices)
+        segment += choices.pop() + ' '
+    segment = segment[:-1]
+    return segment
+
+
 def main():
     """Use the user's name to generate a truly terrifying dictator name."""
     print("Despotifier V1.0. Trademark MELadbrook.\n\n")
@@ -12,23 +23,20 @@ def main():
     title = ('Emporer', 'King', 'Viceroy', 'Grand Duke', 'Archduke',
              'Prince', 'Duke', 'Earl', 'Count', 'Viscount', 'Baron')
 
-    qual_num = (1, 2, 3)
-    qual = ('PhD', 'MD', 'DPhil', 'JD', 'DO', 'Prof', 'DBA')
+    qual_num = (2, 3, 4)
+    qual = ['PhD', 'MD', 'DPhil', 'JD', 'DO', 'Prof', 'DBA']
 
     abbr = ('VC', 'OBE', 'DSO', 'MC', 'CBE')
 
-    suffix = (' The Big News', ' Grunts', ' Tinkie Winkie', ' DumDum',
-              ' Beenie-Weenie', ' Stinkbug', ' Pottin Soil', ' The Squirts',
-              ' Jazz Hands')
+    suffix = ('The Big News', 'Grunts', 'Tinkie Winkie', 'DumDum',
+              'Beenie-Weenie', 'Stinkbug', 'Pottin Soil', 'The Squirts',
+              'Jazz Hands')
 
     while True:
         title_name = random.choice(title)
         last_name = random.choice(suffix)
-        qual_name_list = random.choices(qual, k=random.choice(qual_num))
-        qual_name = ''
-        for i in qual_name_list:
-            qual_name += i
 
+        qual_name = create_segment(qual_num, qual)
 
         print("\n\n")
         print("{} {} {} {}".format(title_name, user_name, qual_name,
